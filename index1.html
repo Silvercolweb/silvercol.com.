@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhijeet Kushwaha | Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #1a1a2e, #16213e);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #ff8c00;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: #000000;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links li a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #000;
+        }
+
+        /* ✅ Hamburger Menu Button */
+        .menu-toggle {
+            display: none;
+            /* hidden by default for large screens */
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 22px;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1100;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            background: #000000;
+            /* make it white for contrast */
+            border-radius: 3px;
+            transition: all 0.1s ease;
+        }
+
+        /* Animate toggle into X */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ✅ Mobile View */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+                /* show button on mobile */
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: #ff8c00;
+                flex-direction: column;
+                align-items: center;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: all 0.4s ease;
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+                opacity: 1;
+            }
+
+            .nav-links li {
+                padding: 1rem 0;
+            }
+        }
+
+        header h1 {
+            font-size: 22px;
+            letter-spacing: 1px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 8px 12px;
+            font-size: 16px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: #00aaff;
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 130px 40px 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+            animation: slideIn 1.2s ease;
+        }
+
+        .hero-text h2 {
+            font-size: 42px;
+            color: #ffe15c;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .hero-text button {
+            padding: 12px 25px;
+            border: none;
+            background: #fffdfd;
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .hero-text button:hover {
+            background: #fac73b;
+            transform: scale(1.05);
+        }
+
+        .hero-img {
+            flex: 1 1 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-img img {
+            width: 80%;
+            max-width: 320px;
+            border-radius: 50%;
+            border: 4px solid #00aaff;
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        /* 🔹 Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* 🔸 Responsive Design 🔸 */
+        @media (max-width: 1024px) {
+            .hero-text h2 {
+                font-size: 36px;
+            }
+
+            .hero-text p {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 768px) {
+           /* Header Styling */
+        header {
+            background: #ff8c00;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav.container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            color: #000000;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links li a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #000;
+        }
+
+        /* ✅ Hamburger Menu Button */
+        .menu-toggle {
+            display: none;
+            /* hidden by default for large screens */
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 22px;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1100;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            background: #000000;
+            /* make it white for contrast */
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animate toggle into X */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ✅ Mobile View */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+                /* show button on mobile */
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: #ff8c00;
+                flex-direction: column;
+                align-items: center;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transition: all 0.4s ease;
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+                opacity: 1;
+            }
+
+            .nav-links li {
+                padding: 1rem 0;
+            }
+        }
+            nav {
+                margin-top: 10px;
+            }
+
+            section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h2 {
+                font-size: 32px;
+            }
+
+            .hero-text p {
+                font-size: 16px;
+            }
+
+            .hero-img img {
+                width: 60%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            nav a {
+                font-size: 14px;
+                margin: 6px 8px;
+            }
+
+            .hero-text h2 {
+                font-size: 26px;
+            }
+
+            .hero-text p {
+                font-size: 15px;
+            }
+
+            .hero-text button {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .hero-img img {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+     <header>
+        <nav class="container">
+            <a href="#" class="logo">SILVERCOL</a>
+
+            <!-- Hamburger Menu Button -->
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Gallery</a></li>
+                <li><a href="index.html">About</a></li>
+                <li><a href="index.html">Contact</a></li>
+                <!--<li><a href="serve.html">Product</a></li>-->               
+                <li><a href="index1.html">CEO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-text">
+            <h2>Hello, I'm ABHIJEET SHRIMALI</h2>
+            <p>
+                A <strong>Chemical Engineer from IIT (BHU), Varanasi</strong><br />
+                and the proud founder of <strong>Silvercol</strong> — a company
+                dedicated to innovation and excellence in the field of
+                <strong>construction chemicals and advanced adhesives.</strong>
+            </p>
+            <button onclick="scrollToSection('contact')">Contact Me</button>
+        </div>
+
+        <div class="hero-img">
+            <img src="02.png" alt="Abhijeet Profile Photo" />
+        </div>
+    </section>
+
+    <!--/*<footer>
+        © 2025 My Portfolio | Designed ❤️ by Tinku Prajapati
+    </footer>-->
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+</body>
+
+</html>
